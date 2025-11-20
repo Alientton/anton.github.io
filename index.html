@@ -4,486 +4,503 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ziqian Yang | Software Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS VARIABLES & RESET --- */
+        /* --- GEMINI / AI THEME VARIABLES --- */
         :root {
-            --primary: #2563eb; /* Professional Blue */
-            --secondary: #1e293b; /* Dark Slate */
-            --accent: #3b82f6;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #334155;
-            --text-light: #64748b;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --bg-dark: #0e1016; /* Deep Space Black */
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-muted: #9aa0a6;
+            --gemini-gradient: linear-gradient(90deg, #4b90ff, #ff5546);
+            --gemini-glow: linear-gradient(135deg, #1c77ff 0%, #4542b1 50%, #27c3b1 100%);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --radius: 24px;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            scroll-behavior: smooth;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
 
-        /* --- NAVIGATION --- */
-        .navbar {
+        /* --- AMBIENT BACKGROUND GLOW --- */
+        .ambient-glow {
             position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 5%;
+            top: -20%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: var(--gemini-glow);
+            filter: blur(150px);
+            opacity: 0.15;
+            z-index: -1;
+            border-radius: 50%;
+            animation: pulseGlow 10s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); opacity: 0.1; }
+            100% { transform: scale(1.2); opacity: 0.2; }
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 600px;
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(20px);
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             z-index: 1000;
         }
 
         .logo {
-            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--secondary);
+            font-size: 1.1rem;
+            background: var(--gemini-glow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            font-weight: 500;
-            color: var(--text-main);
+            gap: 20px;
+            font-size: 0.9rem;
         }
 
         .nav-links a:hover {
-            color: var(--primary);
+            color: #4b90ff;
+            text-shadow: 0 0 10px rgba(75, 144, 255, 0.5);
         }
 
         /* --- HERO SECTION --- */
         .hero {
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            padding: 0 10%;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-        }
-
-        .hero-content {
-            display: flex;
-            flex-direction: row; /* Side by side layout */
             align-items: center;
-            gap: 4rem;
-            max-width: 1200px;
-            width: 100%;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
         }
 
-        .hero-text {
-            flex: 1;
+        .sparkle-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
         }
 
-        .hero-text h1 {
-            font-size: 3.5rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-            line-height: 1.1;
-        }
-
-        .hero-text .typewriter {
-            font-size: 1.5rem;
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 2rem;
-            min-height: 1.6em;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            border: none;
-        }
-
-        .btn-primary:hover { background: #1d4ed8; }
-
-        .btn-outline {
-            border: 2px solid var(--secondary);
-            color: var(--secondary);
-            background: transparent;
-        }
-
-        .btn-outline:hover { background: var(--secondary); color: white; }
-
-        /* --- IMAGE STYLES --- */
-        .profile-img-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
+        .profile-wrapper {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin-bottom: 30px;
+            padding: 3px; /* Width of the gradient border */
+            background: var(--gemini-glow);
+            border-radius: 50%;
         }
 
         .profile-img {
-            width: 350px;
-            height: 350px;
-            object-fit: cover;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            border: 5px solid white;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            /* Placeholder background if image is missing */
-            background-color: #ddd; 
+            object-fit: cover;
+            background: #222;
+            border: 4px solid var(--bg-dark); /* Inner spacing */
         }
 
-        /* --- SECTIONS GENERAL --- */
-        section {
-            padding: 5rem 10%;
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .gradient-text {
+            background: var(--gemini-glow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .btn-ai {
+            background: white;
+            color: black;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-ai:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- SECTIONS --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 20px;
         }
 
         .section-title {
-            text-align: center;
             font-size: 2rem;
-            margin-bottom: 3rem;
-            color: var(--secondary);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--primary);
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        /* --- EXPERIENCE (Timeline) --- */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline-item {
-            padding: 2rem;
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-            border-left: 5px solid var(--primary);
-            position: relative;
-        }
-
-        .timeline-header {
+            margin-bottom: 40px;
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
         }
 
-        .timeline-role { font-size: 1.25rem; font-weight: 700; color: var(--secondary); }
-        .timeline-company { color: var(--primary); font-weight: 600; }
-        .timeline-date { font-size: 0.9rem; color: var(--text-light); }
+        .section-title::before {
+            content: '✦';
+            color: #4b68ea;
+            font-size: 1.5rem;
+        }
 
-        /* --- PROJECTS (Grid Cards) --- */
-        .project-grid {
+        /* --- GRID CARDS (Experience & Projects) --- */
+        .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
         }
 
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 12px;
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 30px;
+            transition: 0.3s;
+            position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-            border: 1px solid #e2e8f0;
         }
 
-        .project-card:hover {
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-5px);
         }
 
-        .project-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background-color: #cbd5e1; /* Placeholder color */
+        /* A subtle gradient sheen on hover */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: var(--gemini-glow);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
         }
 
-        .project-content {
-            padding: 1.5rem;
+        .card:hover::after {
+            transform: scaleX(1);
         }
 
-        .project-tags {
+        .card-date {
+            font-size: 0.85rem;
+            color: #4b68ea; /* Purple accent */
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .card-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card-desc ul {
+            padding-left: 20px;
+            color: #d1d5db;
+            font-size: 0.95rem;
+        }
+        
+        .card-desc li {
+            margin-bottom: 8px;
+            position: relative;
+            list-style: disc;
+        }
+
+        /* --- PILL TAGS --- */
+        .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 1rem 0;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         .tag {
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-
-        /* --- SKILLS --- */
-        .skills-container {
+        
+        /* --- SKILLS CLOUD --- */
+        .skills-wrapper {
             display: flex;
             flex-wrap: wrap;
+            gap: 15px;
             justify-content: center;
-            gap: 1rem;
-            max-width: 900px;
-            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
         }
 
-        .skill-badge {
-            background: white;
-            border: 1px solid #e2e8f0;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            color: var(--secondary);
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        .skill-item {
+            font-size: 1.1rem;
+            padding: 10px 25px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid #333;
             transition: 0.3s;
+            cursor: default;
         }
 
-        .skill-badge:hover {
-            border-color: var(--primary);
-            color: var(--primary);
+        .skill-item:hover {
+            border-color: #4b90ff;
+            box-shadow: 0 0 15px rgba(75, 144, 255, 0.3);
         }
 
         /* --- FOOTER --- */
         footer {
-            background: var(--secondary);
-            color: white;
             text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
         }
 
-        /* --- MOBILE RESPONSIVE --- */
+        /* --- ANIMATIONS --- */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
         @media (max-width: 768px) {
-            .hero-content {
-                flex-direction: column-reverse; /* Stack text under image on mobile */
-                text-align: center;
-                gap: 2rem;
-            }
-            
-            .hero-text h1 { font-size: 2.5rem; }
-            
-            .hero-btns { justify-content: center; }
-
-            .profile-img { width: 250px; height: 250px; }
-
-            .nav-links { display: none; } /* Simple hide for mobile, can be upgraded */
+            h1 { font-size: 2.5rem; }
+            nav { width: 95%; padding: 10px 20px; }
+            .grid-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo">Ziqian Yang.</div>
+    <div class="ambient-glow"></div>
+
+    <nav>
+        <div class="logo">ZY.</div>
         <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
+            <a href="#education">Edu</a>
+            <a href="#experience">Exp</a>
+            <a href="#projects">Work</a>
             <a href="#skills">Skills</a>
+            <a href="mailto:yanganton024@gmail.com">Contact</a>
         </div>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Hi, I'm Ziqian</h1>
-                <div class="typewriter" id="typewriter"></div>
-                <p style="margin-bottom: 2rem; color: var(--text-light);">
-                    Master's Student at Georgia Tech & Computer Science Graduate from University at Buffalo. 
-                    Specializing in Full Stack Development and Backend Systems.
-                </p>
-                <div class="hero-btns">
-                    <a href="mailto:yanganton024@gmail.com" class="btn btn-primary">Contact Me</a>
-                    <a href="https://linkedin.com/in/ziqian-yang-aa138821b" class="btn btn-outline" target="_blank">LinkedIn</a>
-                </div>
-            </div>
-            
-            <div class="profile-img-container">
-                <img src="https://via.placeholder.com/350" alt="Ziqian Yang" class="profile-img" id="myProfilePic">
-            </div>
-        </div>
-    </section>
-
-    <section id="experience">
-        <h2 class="section-title">Experience</h2>
+    <section class="hero">
+        <div class="sparkle-icon">✨</div>
         
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-header">
-                    <div>
-                        <div class="timeline-role">Research Assistant</div>
-                        <div class="timeline-company">University at Buffalo</div>
-                    </div>
-                    <div class="timeline-date">Jan 2023 – Feb 2024</div>
-                </div>
-                <ul>
-                    <li>Developed an automated audio verification system using Python Librosa (90% accuracy).</li>
-                    <li>Designed frontend UI for Django apps and managed AWS/Docker deployment.</li>
-                    <li>Engineered AR robotic arm controls using Unity and C#.</li>
-                </ul>
-            </div>
+        <div class="profile-wrapper">
+            <img src="anton.jpg" alt="Ziqian Yang" class="profile-img">
+        </div>
 
-            <div class="timeline-item">
-                <div class="timeline-header">
-                    <div>
-                        <div class="timeline-role">Web Developer</div>
-                        <div class="timeline-company">The Yiddish Arts and Academics Association</div>
-                    </div>
-                    <div class="timeline-date">Feb 2023 – May 2023</div>
-                </div>
-                <ul>
-                    <li>Boosted visitor engagement by 60% through efficient website development.</li>
-                    <li>Integrated frontend designs with WordPress APIs for scheduling/payment systems.</li>
-                </ul>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-header">
-                    <div>
-                        <div class="timeline-role">Accounting Assistant</div>
-                        <div class="timeline-company">Bethel Management Inc.</div>
-                    </div>
-                    <div class="timeline-date">Nov 2019 – Mar 2021</div>
-                </div>
-                <ul>
-                    <li>Managed financial transactions in QuickBooks and refined documents using MS Office.</li>
-                </ul>
-            </div>
+        <h1>Hello, I'm <span class="gradient-text">Ziqian</span></h1>
+        <p>Master's Student at Georgia Tech & Computer Science Graduate from University at Buffalo. Specializing in Full Stack Development and Backend Systems.</p>
+        
+        <div style="margin-top: 30px;">
+            <a href="https://linkedin.com/in/ziqian-yang-aa138821b" target="_blank" class="btn-ai">View LinkedIn Profile</a>
         </div>
     </section>
 
-    <section id="projects">
+    <div class="container" id="education">
+        <h2 class="section-title">Education</h2>
+        
+        <div class="grid-container">
+            <div class="card">
+                <div class="card-date">Aug 2025 – Present</div>
+                <h3 class="card-title">Master of Science in Computer Science</h3>
+                <span class="card-subtitle">Georgia Institute of Technology</span>
+                <div class="card-desc" style="margin-top: 10px;">
+                    <span class="tag">Online</span>
+                    <span class="tag">CS Specialization</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-date">Jan 2022 – Feb 2024</div>
+                <h3 class="card-title">BS Computer Science</h3>
+                <span class="card-subtitle">University at Buffalo – SUNY</span>
+                <div class="card-desc" style="margin-top: 10px;">
+                    <p style="color: #d1d5db;">GPA: 3.85 / 4.0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="experience">
+        <h2 class="section-title">Experience Journey</h2>
+        
+        <div class="grid-container">
+            <div class="card">
+                <div class="card-date">Jan 2023 – Feb 2024</div>
+                <h3 class="card-title">Research Assistant</h3>
+                <span class="card-subtitle">University at Buffalo</span>
+                <div class="card-desc">
+                    <ul>
+                        <li>Developed an automated audio verification system by utilizing the Python Librosa library to compute RMS values, ensuring voice file frequencies remained between 80Hz and 220Hz with over 90% accuracy.</li>
+                        <li>Designed the front-end UI of Django web application using HTML/CSS and contributed to deployment and cloud infrastructure by configuring and running Docker containers on AWS EC2. </li>
+                        <li>Engineered an augmented reality robotic arm control system using Meta Quest headset technology, implementing rotation and grip functionality through Unity and C# programming. </li>
+                        <li>Optimized the UI/UX of the STREAM research website (https://stream.eng.buffalo.edu/index.html) enhancing usability and accessibility for a broader audience.</li>
+                    </ul>
+                </div>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">AWS</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">C#</span>
+                    <span class="tag">Docker</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-date">Feb 2023 – May 2023</div>
+                <h3 class="card-title">Web Developer</h3>
+                <span class="card-subtitle">The Yiddish Arts & Academics Association</span>
+                <div class="card-desc">
+                    <ul>
+                        <li>Developed efficient and easy-to-navigate websites for the organization, boosting visitor engagement by 60%.</li>
+                        <li>Built and integrated front-end designs with back-end APIs using WordPress, streamlining the appointment scheduling and payment system for visitors.</li>
+                        <li>Designed and distributed weekly newsletters to 500+ subscribers using GMass email automation</li>
+                    </ul>
+                </div>
+                <div class="tags">
+                    <span class="tag">WordPress</span>
+                    <span class="tag">PHP</span>
+                    <span class="tag">API Integration</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-date">Nov 2019 – Mar 2021</div>
+                <h3 class="card-title">Accounting Assistant</h3>
+                <span class="card-subtitle">Bethel Management Inc.</span>
+                <div class="card-desc">
+                    <ul>
+                        <li>Ensured accurate bookkeeping by recording and managing financial transactions in QuickBooks.</li>
+                        <li>Reviewed and refined financial documents with Microsoft Word and Excel for high clarity and accuracy.</li>
+                        <li>Provided responsive customer service to establish communication between clients and accountants.</li>
+                    </ul>
+                </div>
+                <div class="tags">
+                    <span class="tag">QuickBooks</span>
+                    <span class="tag">Microsoft Excel</span>
+                    <span class="tag">Customer Service</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="projects">
         <h2 class="section-title">Featured Projects</h2>
-        <div class="project-grid">
-            
-            <div class="project-card">
-                <img src="https://via.placeholder.com/400x200" alt="EcomEdge" class="project-img">
-                <div class="project-content">
-                    <h3>EcomEdge</h3>
-                    <div class="project-tags">
-                        <span class="tag">Java</span>
-                        <span class="tag">Spring Boot</span>
-                        <span class="tag">React</span>
-                        <span class="tag">MySQL</span>
-                    </div>
-                    <p>Full-stack E-commerce application. Implemented efficient data access with Spring Data JPA and Redis via Docker. Styled with Material UI.</p>
+        
+        <div class="grid-container">
+            <div class="card">
+                <div class="card-date">Full Stack</div>
+                <h3 class="card-title">EcomEdge</h3>
+                <span class="card-subtitle">E-commerce Application</span>
+                <p style="color: #ccc; font-size: 0.95rem; margin-bottom: 15px;">
+                    A robust full-stack platform utilizing Spring Boot for backend infrastructure and React for the frontend interface.
+                </p>
+                <div class="tags">
+                    <span class="tag">Java Spring Boot</span>
+                    <span class="tag">React</span>
+                    <span class="tag">MySQL</span>
+                    <span class="tag">Redis</span>
+                    <span class="tag">Docker</span>
                 </div>
             </div>
 
-            <div class="project-card">
-                <img src="https://via.placeholder.com/400x200" alt="Chat App" class="project-img">
-                <div class="project-content">
-                    <h3>Text-Chat-Application</h3>
-                    <div class="project-tags">
-                        <span class="tag">C</span>
-                        <span class="tag">Unix Shell</span>
-                        <span class="tag">Socket Programming</span>
-                    </div>
-                    <p>Multi-client chat server utilizing TCP socket programming and select() system calls for multiplexing I/O.</p>
+            <div class="card">
+                <div class="card-date">Systems</div>
+                <h3 class="card-title">Text-Chat-Application</h3>
+                <span class="card-subtitle">Unix Socket Programming</span>
+                <p style="color: #ccc; font-size: 0.95rem; margin-bottom: 15px;">
+                    A server-client architecture capable of handling multiple chat clients simultaneously using TCP sockets and I/O multiplexing.
+                </p>
+                <div class="tags">
+                    <span class="tag">C Language</span>
+                    <span class="tag">Unix</span>
+                    <span class="tag">TCP/IP</span>
                 </div>
             </div>
-
         </div>
-    </section>
+    </div>
 
-    <section id="skills" style="background: #fff;">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-container">
-            <div class="skill-badge">Java</div>
-            <div class="skill-badge">Python</div>
-            <div class="skill-badge">JavaScript</div>
-            <div class="skill-badge">Spring Boot</div>
-            <div class="skill-badge">React</div>
-            <div class="skill-badge">Docker</div>
-            <div class="skill-badge">AWS</div>
-            <div class="skill-badge">SQL</div>
-            <div class="skill-badge">C#</div>
-            <div class="skill-badge">Git</div>
+    <div class="container" id="skills">
+        <h2 class="section-title">Technical Knowledge</h2>
+        <div class="skills-wrapper">
+            <div class="skill-item">Java</div>
+            <div class="skill-item">Python</div>
+            <div class="skill-item">Spring Boot</div>
+            <div class="skill-item">React.js</div>
+            <div class="skill-item">SQL (MySQL/Postgres)</div>
+            <div class="skill-item">Docker</div>
+            <div class="skill-item">AWS</div>
+            <div class="skill-item">C / C#</div>
+            <div class="skill-item">HTML/CSS</div>
+            <div class="skill-item">Git</div>
         </div>
-    </section>
+    </div>
 
     <footer>
-        <p>&copy; 2025 Ziqian Yang. Built with HTML, CSS & JS.</p>
+        <p>Content &copy; 2025 Ziqian Yang.</p>
     </footer>
-
-    <script>
-        // 1. Typewriter Effect for the Hero Section
-        const textElement = document.getElementById('typewriter');
-        const phrases = ["Software Engineer", "Full Stack Developer", "CS Master's Student"];
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function type() {
-            const currentPhrase = phrases[phraseIndex];
-            
-            if (isDeleting) {
-                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                isDeleting = true;
-                setTimeout(type, 2000); // Pause at end of word
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                setTimeout(type, 500); // Pause before typing next
-            } else {
-                const speed = isDeleting ? 50 : 100;
-                setTimeout(type, speed);
-            }
-        }
-
-        // Start the typewriter
-        document.addEventListener('DOMContentLoaded', type);
-
-        // 2. Image Fallback (Optional)
-        // If you forget to add images, this keeps the placeholder visible
-        document.querySelectorAll('img').forEach(img => {
-            img.onerror = function() {
-                this.src = 'https://via.placeholder.com/400x300?text=Image+Missing';
-            };
-        });
-    </script>
 
 </body>
 </html>
